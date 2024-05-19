@@ -1,0 +1,1 @@
+BASIC_CODE = "func main() \n{\n\tprint(\"Hello world\");\n}\n\nmain();"
