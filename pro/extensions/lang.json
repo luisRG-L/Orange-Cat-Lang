@@ -1,0 +1,13 @@
+{
+    "colors":
+    {
+        "comments": "green",
+        "commands": "purple",
+        "variables": "light blue",
+        "functions": "orange",
+        "literals(constants)": "red",
+        "operators and asignators": "white",
+        "values": "light gray",
+        "typevars": "blue"
+    }
+}

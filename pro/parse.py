@@ -2,7 +2,7 @@
 from lexer import *
 
 def parse_code(op_tok):
-    main_node = Parser(op_tok)
+    parser = Parser(op_tok)
 
 class Parser:
     op_tok = None
