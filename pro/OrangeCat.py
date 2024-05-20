@@ -4,7 +4,7 @@ from bridge import *
 from lexer import *
 from languajes import *
 from exiter import *
-from parser import *
+from parse import *
 
 exe = Languaje(".exe")
 jar = Languaje(".jar")
@@ -14,9 +14,6 @@ zipf = Languaje(".zip")
 exebridge = Bridge(1)
 
 buildMain()
-
-fileName = input("File route: ")
-code = getFileArray(PROJECTS + fileName + ".ocat")
 
 def connect():
     global ocf, zipf, jar, exe, exebridge
@@ -52,7 +49,7 @@ def printStacks():
     BridgeSide(connectBridge.thread).printStack()
 
 
-def __start_proccess__():
+def start_proccess(code):
     connect()
     updateOCat()
     lexerCode(code)
@@ -60,6 +57,3 @@ def __start_proccess__():
     exitLexedCode(code)
     updateOCat()
     printStacks()
-    program = parse_program()
-
-__start_proccess__()

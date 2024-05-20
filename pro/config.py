@@ -5,4 +5,5 @@ VERBOSE_TOKENS = True
 VERBOSE_ACTIONS = False
 
 USER_DIR = os.getenv("USERPROFILE")
-PROJECTS = USER_DIR + "\\Documents\\Orange Cat\\versions\\pro\\projects\\"
+ABSOLUTE_PATH = "\\Orange-Cat-Lang\\pro"
+PROJECTS = USER_DIR + ABSOLUTE_PATH + "\\projects\\"

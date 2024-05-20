@@ -1,18 +1,23 @@
 from config import *
-import os
 from basicCodes import *
+from utilities import *
 
 directory = input("Project name: ")
-file_path = PROJECTS + directory
+project_path = PROJECTS + directory
 file_name = 'main.ocat'
-complete = os.path.join(file_path, file_name)
+complete = os.path.join(project_path, file_name)
 
-if not os.path.exists(file_path):
-    os.makedirs(file_path)
-else:
-    print("This project already exists")
-    
-with open(complete, 'w') as file:
-    file.write(BASIC_CODE)
+libs_path = os.path.join(project_path, "\\libs")
+libs_file_name = "libs.olib"
+lib1_file_name = "lib1.ocat"
+complete_olib = os.path.join(libs_path, libs_file_name)
+complete_lib1 = os.path.join(libs_path, lib1_file_name)
+
+createFolder(project_path)
+createFile(complete, BASIC_CODE)
+
+createFolder(libs_path)
+createFile(complete_olib, OLIB_CODE)
+createFile(complete_lib1, LIB_CODE)
 
 print(f'Created dev project on: {complete}')

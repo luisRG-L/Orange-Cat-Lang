@@ -1,5 +1,6 @@
 from languajes import *
 from bridge import *
+from config import *
 
 this = Languaje("OrangeCat")
 python = Languaje("Python")
@@ -17,5 +18,5 @@ def buildMain():
     connectBridge.connect2(thisSide, pythonSide)
 
 def update():
-    if(VERBOSE_ACTIONS):
+    if VERBOSE_ACTIONS:
         print("Updated")
