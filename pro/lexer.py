@@ -82,6 +82,8 @@ COMMENT = [
     "/+"
 ]
 
+END = [";"]
+
 tokens = [
     VARTYPE,
     VARNAME,
@@ -89,7 +91,8 @@ tokens = [
     VALUE,
     ASSIGN,
     COMMAND,
-    COMMENT
+    COMMENT,
+    END
 ]
 
 VARTYPE_TOKEN = 0
@@ -99,6 +102,7 @@ VALUE_TOKEN = 3
 ASSIGN_TOKEN = 4
 COMMAND_TOKEN = 5
 COMMENT_TOKEN = 6
+END_TOKEN = 7
 
 tokenName = [
     "Var type",
@@ -107,7 +111,8 @@ tokenName = [
     "Value",
     "Assign",
     "Command",
-    "Comment"
+    "Comment",
+    "End"
 ]
 
 def lexer_code(line: str):
