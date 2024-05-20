@@ -1,5 +1,6 @@
 import os
 import shutil
+from pathlib import Path
 
 def getLineOf(code : str, number : int):
     return code[number]
@@ -9,6 +10,12 @@ def getFileArray(file_path):
         content = file.read()
         words = content.split()
         return words
+    
+def getFile(file_path):
+    archivo = Path('archivo.txt')
+    contenido = archivo.read_text()
+    print(contenido)
+
     
 def createFile(file_path, content):
     with open(file_path, 'w') as file:

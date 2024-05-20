@@ -111,10 +111,10 @@ tokenName = [
 ]
 
 def lexer_code(line: str):
-    return Lexer(line).lexer_code
+    return Lexer(line).lexer_code()
 
 def specify_code(line: str):
-    return tokenName[lexer_code]
+    return tokenName[lexer_code(line)]
 
 class Lexer:
     line = None
@@ -137,4 +137,12 @@ class Lexer:
                     except:
                         return VARNAME_TOKEN
         return VARNAME_TOKEN
+    
+def iterateTokens(code):
+    tokenIndex = len(code)
+    tokenList = []
+    for i in range(tokenIndex):
+        result = lexer_code(i)
+        tokenList.append(result)
+    return tokenList
 

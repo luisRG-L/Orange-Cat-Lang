@@ -5,6 +5,7 @@ from lexer import *
 from languajes import *
 from exiter import *
 from parse import *
+from basicCodes import *
 
 exe = Languaje(".exe")
 jar = Languaje(".jar")
@@ -47,8 +48,8 @@ def printStacks():
     BridgeSide(connectBridge.thread).printStack()
 
 def doProcess(code):
-    for x in range(len(code)):
-        lexer_code
+    if VERBOSE_ACTIONS:
+        print("Doing process")
 
 def start_proccess(code):
     connect()
