@@ -33,13 +33,11 @@ def updateOCat():
     ocf.connect(this, exebridge)
     exebridge.update()
 
-def lexerCode(code: list):
+def exitLexedCode(code):
     for x in range(len(code)):
         if VERBOSE_TOKENS:
             print("Type keyword:", tokenName[lexer_code(code[x])])
             print("Number keyword:", lexer_code(code[x]))
-
-def exitLexedCode(code):
     if VERBOSE_TOKENS:
         print("Exit number code:", get_exit(code))
 
@@ -48,12 +46,15 @@ def printStacks():
     pythonSide.printStack()
     BridgeSide(connectBridge.thread).printStack()
 
+def doProcess(code):
+    for x in range(len(code)):
+        lexer_code
 
 def start_proccess(code):
     connect()
     updateOCat()
-    lexerCode(code)
-    updateOCat()
     exitLexedCode(code)
     updateOCat()
     printStacks()
+    doProcess(code)
+    updateOCat()

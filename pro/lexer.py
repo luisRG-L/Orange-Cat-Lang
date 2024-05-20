@@ -111,33 +111,30 @@ tokenName = [
 ]
 
 def lexer_code(line: str):
-    if VERBOSE_ACTIONS:
-        print("Lexing")
-    if line is None:
-        raise NotImplementedError("Lexer error: Not implemented line")
-    if line == "":
-        return VARNAME_TOKEN
-    for i in range(len(tokens)):
-        for n in range(len(tokens[i])):
-            if line.startswith(tokens[i][n]):
-                try:
-                    return i
-                except:
-                    return VARNAME_TOKEN
-    return VARNAME_TOKEN
+    return Lexer(line).lexer_code
 
 def specify_code(line: str):
-    if VERBOSE_ACTIONS:
-        print("Lexing")
-    if line is None:
-        raise NotImplementedError("Lexer error: Not implemented line")
-    if line == "":
+    return tokenName[lexer_code]
+
+class Lexer:
+    line = None
+
+    def __init__(self, line):
+        self.line = line
+    
+    def lexer_code(self):
+        if VERBOSE_ACTIONS:
+            print("Lexing")
+        if self.line is None:
+            raise NotImplementedError("Lexer error: Not implemented line")
+        if self.line == "":
+            return VARNAME_TOKEN
+        for i in range(len(tokens)):
+            for n in range(len(tokens[i])):
+                if self.line.startswith(tokens[i][n]):
+                    try:
+                        return i
+                    except:
+                        return VARNAME_TOKEN
         return VARNAME_TOKEN
-    for i in range(len(tokens)):
-        for n in range(len(tokens[i])):
-            if line.startswith(tokens[i][n]):
-                try:
-                    return tokens[i][n]
-                except:
-                    return "Unknown"
-    return tokenName[VARNAME_TOKEN]
+
