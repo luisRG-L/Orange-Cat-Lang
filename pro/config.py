@@ -1,7 +1,7 @@
 import os
 
 VERBOSE_PROCESS = False
-VERBOSE_TOKENS = True 
+VERBOSE_TOKENS = False 
 VERBOSE_ACTIONS = False
 
 USER_DIR = os.getenv("USERPROFILE")

@@ -42,7 +42,7 @@ int main(int argc, char *argv[]) {
             } else {
                 printf("Exit code: %d\n", status);
             }
-        } else if (argc > 2 && strcmp(argv[2], "") == 0){
+        } else if (argc > 2 && strcmp(argv[2], "file") == 0){
             char command[512];
             const char *python_script = "runner.py";
             snprintf(command, sizeof(command), "python \"%s%s%s\"", NATURAL_ROUTE, ABSOLUTE_PATH, python_script);

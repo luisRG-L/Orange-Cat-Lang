@@ -37,9 +37,7 @@ VALUE = [
     "false",
     "none",
     "null",
-    "void",
-    "{",
-    "}"
+    "void"
 ]
 
 OPERATOR = [
@@ -70,7 +68,8 @@ COMMAND = [
     "return",
     "import",
     "export",
-    "then"
+    "then",
+    "print"
 ]
 
 COMMENT = [
@@ -84,6 +83,13 @@ COMMENT = [
 
 END = [";"]
 
+KEYWORD = [
+    "(", ")",
+    "{", "}",
+    "[", "]",
+    "/", "/"
+]
+
 tokens = [
     VARTYPE,
     VARNAME,
@@ -92,7 +98,8 @@ tokens = [
     ASSIGN,
     COMMAND,
     COMMENT,
-    END
+    END,
+    KEYWORD
 ]
 
 VARTYPE_TOKEN = 0
@@ -103,6 +110,7 @@ ASSIGN_TOKEN = 4
 COMMAND_TOKEN = 5
 COMMENT_TOKEN = 6
 END_TOKEN = 7
+KEYWORD_TOKEN = 8
 
 tokenName = [
     "Var type",
@@ -112,19 +120,19 @@ tokenName = [
     "Assign",
     "Command",
     "Comment",
-    "End"
+    "End",
+    "Keyword"
 ]
 
 def lexer_code(line: str):
-    return Lexer(line).lexer_code()
+    lexer = Lexer(line)
+    return lexer.lexer_code()
 
 def specify_code(line: str):
     return tokenName[lexer_code(line)]
 
 class Lexer:
-    line = None
-
-    def __init__(self, line):
+    def __init__(self, line: str):
         self.line = line
     
     def lexer_code(self):
@@ -137,17 +145,12 @@ class Lexer:
         for i in range(len(tokens)):
             for n in range(len(tokens[i])):
                 if self.line.startswith(tokens[i][n]):
-                    try:
-                        return i
-                    except:
-                        return VARNAME_TOKEN
+                    return i
         return VARNAME_TOKEN
     
 def iterateTokens(code):
-    tokenIndex = len(code)
     tokenList = []
-    for i in range(tokenIndex):
-        result = lexer_code(i)
+    for line in code:
+        result = lexer_code(line)
         tokenList.append(result)
     return tokenList
-

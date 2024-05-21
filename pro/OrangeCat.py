@@ -50,6 +50,7 @@ def printStacks():
 def doProcess(code):
     if VERBOSE_ACTIONS:
         print("Doing process")
+    parse_code(code)
 
 def start_proccess(code):
     connect()
