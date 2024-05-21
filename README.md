@@ -4,4 +4,9 @@ Has a easy format and with console system.
 
 ## Console system
 
-The console systems // continuo
+The Orange Cat console systems are:
+
+### ocat
+This is the principal Orange Cat console command, has this commands:
+ - **help**: Shows you the Orange Cat ocat commands
+ - // continue
