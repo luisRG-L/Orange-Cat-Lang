@@ -1,0 +1,10 @@
+print ( "Hello%world" ) ;
+
+int funcion = 3 ;
+
+func decirHolaALaClase ( ) {
+print ( "Hola%Orange%Cat%desde%python" ) ;
+question ( "Cuantos%sois%?" ) ;
+} ;
+
+decirHolaALaClase ( ) ;

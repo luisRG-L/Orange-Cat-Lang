@@ -1,0 +1,126 @@
+[{
+    "colors":
+    {
+        "comments": "green",
+        "commands": "purple",
+        "variables": "light blue",
+        "functions": "orange",
+        "asignators": "white",
+        "operators": "yellow",
+        "values": "light gray",
+        "typevars": "blue"
+    },
+    "keyword": {
+        "variable-types":[
+            "int",
+            "decimal",
+            "bool",
+            "func",
+            "char",
+            "string",
+            "class",
+            "enum"
+        ],
+        
+        "variable-names": [],
+        
+        "assign-operators":
+        [
+            "=",
+            "*=",
+            "&="
+        ],
+        
+        "values": 
+        [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "0",
+            "'",
+            "\"",
+            "true",
+            "false",
+            "none",
+            "null",
+            "void"
+        ],
+        
+        "operators":
+        [
+            "==",
+            "**",
+            "&&",
+            ">",
+            "*>",
+            "&>",
+            "<",
+            "*<",
+            "&<",
+            ">=",
+            "*>=",
+            "&>=",
+            "<=",
+            "*<=",
+            "&<="
+        ],
+        
+        "commands": [
+            "if",
+            "else",
+            "elif",
+            "forever",
+            "for",
+            "break",
+            "return",
+            "import",
+            "export",
+            "then",
+            "print"
+        ],
+        
+        "comments":
+        [
+            "//",
+            "//<",
+            "///<",
+            "/#",
+            "/*",
+            "/+"
+        ],
+        
+        "line-end":
+        [
+            ";"
+        ],
+        
+        "keyword":
+        [
+            "(", ")",
+            "{", "}",
+            "[", "]",
+            "/", "/"
+        ]
+    },
+    "[OrangeCat]": {
+        "id": "orangecat",
+        "extensions": [
+            {
+                "name": "runner",
+                "tag": ".ocat",
+                "includes": "#"
+            },
+            {
+                "name": "test",
+                "tag": ".oc",
+                "includes": "#"
+            }
+        ]
+    }
+}]

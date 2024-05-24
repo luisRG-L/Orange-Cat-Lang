@@ -9,7 +9,7 @@
       "stopAtEntry": false,
       "externalConsole": true,
       "cwd": "c:/Users/peque/Orange-Cat-Lang/pro",
-      "program": "c:/Users/peque/Orange-Cat-Lang/pro/build/Debug/outDebug",
+      "program": "c:/Users/peque/Orange-Cat-Lang/pro/build/Release/outRelease",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

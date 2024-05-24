@@ -1,4 +1,3 @@
-# lexer.py
 from config import *
 
 VARTYPE = [
@@ -12,8 +11,6 @@ VARTYPE = [
     "enum"
 ]
 
-VARNAME = []
-
 ASSIGN = [
     "=",
     "*=",
@@ -21,81 +18,45 @@ ASSIGN = [
 ]
 
 VALUE = [
-    "1",
-    "2",
-    "3",
-    "4",
-    "5",
-    "6",
-    "7",
-    "8",
-    "9",
-    "0",
+    "1", "2", "3", "4", "5", "6", "7", "8", "9", "0",
     "'",
     "\"",
-    "true",
-    "false",
-    "none",
-    "null",
-    "void"
+    "true", "false",
+    "none", "null", "void"
 ]
 
 OPERATOR = [
-    "==",
-    "**",
-    "&&",
-    ">",
-    "*>",
-    "&>",
-    "<",
-    "*<",
-    "&<",
-    ">=",
-    "*>=",
-    "&>=",
-    "<=",
-    "*<=",
-    "&<="
+    "+", "-", "*", "/",
+    "==", "**", "&&",
+    ">", "*>", "&>",
+    "<", "*<", "&<",
+    ">=", "*>=", "&>=",
+    "<=", "*<=", "&<="
 ]
 
 COMMAND = [
-    "if",
-    "else",
-    "elif",
-    "forever",
-    "for",
-    "break",
-    "return",
-    "import",
-    "export",
-    "then",
-    "print"
+    "if", "else", "elif",
+    "forever", "for", "break",
+    "return", "import", "export",
+    "then", "print", "question"
 ]
 
 COMMENT = [
-    "//",
-    "//<",
-    "///<",
-    "/#",
-    "/*",
-    "/+"
+    "//", "//<", "///<",
+    "/#", "/*", "/+"
 ]
 
 END = [";"]
 
 KEYWORD = [
-    "(", ")",
-    "{", "}",
-    "[", "]",
-    "/", "/"
+    "(", ")", "{", "}", "[", "]"
 ]
 
 tokens = [
     VARTYPE,
-    VARNAME,
-    OPERATOR,
-    VALUE,
     ASSIGN,
+    VALUE,
+    OPERATOR,
     COMMAND,
     COMMENT,
     END,
@@ -103,25 +64,25 @@ tokens = [
 ]
 
 VARTYPE_TOKEN = 0
-VARNAME_TOKEN = 1
-OPERATOR_TOKEN = 2
-VALUE_TOKEN = 3
-ASSIGN_TOKEN = 4
-COMMAND_TOKEN = 5
-COMMENT_TOKEN = 6
-END_TOKEN = 7
-KEYWORD_TOKEN = 8
+ASSIGN_TOKEN = 1
+VALUE_TOKEN = 2
+OPERATOR_TOKEN = 3
+COMMAND_TOKEN = 4
+COMMENT_TOKEN = 5
+END_TOKEN = 6
+KEYWORD_TOKEN = 7
+VARNAME_TOKEN = 8  # Adding VARNAME_TOKEN
 
 tokenName = [
     "Var type",
-    "Var name",
-    "Operator",
-    "Value",
     "Assign",
+    "Value",
+    "Operator",
     "Command",
     "Comment",
     "End",
-    "Keyword"
+    "Keyword",
+    "Var name"  # Adding Var name
 ]
 
 def lexer_code(line: str):
@@ -141,12 +102,14 @@ class Lexer:
         if self.line is None:
             raise NotImplementedError("Lexer error: Not implemented line")
         if self.line == "":
-            return VARNAME_TOKEN
+            return None
         for i in range(len(tokens)):
             for n in range(len(tokens[i])):
                 if self.line.startswith(tokens[i][n]):
                     return i
-        return VARNAME_TOKEN
+        if self.line[0].isalpha():
+            return VARNAME_TOKEN
+        return None
     
 def iterateTokens(code):
     tokenList = []

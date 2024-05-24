@@ -1,0 +1,59 @@
+{
+    "command": {
+        "id": "ocat",
+        "writerule": "ocat",
+        "type": "console",
+        "arguments": [
+            {
+                "name": "version",
+                "description": "Shows the ocat version",
+                "arguments": [
+                    {
+                        "name": "--version",
+                        "description": "Shows the ocat version with other details"
+                    }
+                ]
+            },
+            {
+                "name": "help",
+                "description": "Shows the help text"
+            },
+            {
+                "name": "run",
+                "description": "Executes an orange cat file",
+                "arguments": [
+                    {
+                        "name": "file",
+                        "description": "Executes an orange cat file"
+                    },
+                    {
+                        "name": "dev",
+                        "description": "Executes an orange cat project"
+                    }
+                ]
+            },
+            {
+                "name": "open",
+                "description": "Opens the ocat directory"
+            },
+            {
+                "name": "clear",
+                "description": "Clear the 'projects' folder"
+            },
+            {
+                "name": "create",
+                "description": "Creates a new orange cat file",
+                "arguments": [
+                    {
+                        "name": "file",
+                        "description": "Creates a new orange cat file"
+                    },
+                    {
+                        "name": "dev",
+                        "description": "Creates a new orange cat project"
+                    }
+                ]
+            }
+        ]
+    }
+}

@@ -12,10 +12,12 @@ void print_help() {
     printf("    --version           Shows the ocat version with other details\n");
     printf("  help              Shows the help text\n");
     printf("  run               Executes an ocat file\n");
+    printf("    file              Executes an orange cat file\n");
     printf("    dev               Executes an orange cat project\n");
     printf("  open              Opens the ocat directory\n");
     printf("  clear             Clear the 'projects' folder\n");
     printf("  create            Creates a new orange cat file\n");
+    printf("    file              Creates a new orange cat file\n");
     printf("    dev               Creates a new orange cat project\n");
 }
 
@@ -48,9 +50,9 @@ int main(int argc, char *argv[]) {
             snprintf(command, sizeof(command), "python \"%s%s%s\"", NATURAL_ROUTE, ABSOLUTE_PATH, python_script);
             int status = system(command);
             if (status == -1) {
-                printf("Error executing this script\n");
+                printf("\n\nError executing this script\n");
             } else {
-                printf("Exit code: %d\n", status);
+                printf("\n\nExit code: %d\n", status);
             }
         }
     } else if (strcmp(argv[1], "open") == 0) {
@@ -68,9 +70,9 @@ int main(int argc, char *argv[]) {
         snprintf(command, sizeof(command), "python \"%s%s%s\"", NATURAL_ROUTE, ABSOLUTE_PATH, python_script);
         int status = system(command);
         if (status == -1) {
-            printf("Error executing this script\n");
+            printf("\n\nError executing this script\n");
         } else {
-            printf("Exit status: %d\n", status);
+            printf("\n\nExit status: %d\n", status);
         }
     } else if (argc > 2 && strcmp(argv[1], "create") == 0) {
         if (strcmp(argv[2], "dev") == 0) {
@@ -79,9 +81,9 @@ int main(int argc, char *argv[]) {
             snprintf(command, sizeof(command), "python \"%s%s%s\"", NATURAL_ROUTE, ABSOLUTE_PATH, python_script);
             int status = system(command);
             if (status == -1) {
-                printf("Error executing this script\n");
+                printf("\n\nError executing this script\n");
             } else {
-                printf("Exit status: %d\n", status);
+                printf("\n\nExit status: %d\n", status);
             }
         } else if(argc > 2 && strcmp(argv[2], "file") == 0){
             char command[512];
@@ -89,9 +91,9 @@ int main(int argc, char *argv[]) {
             snprintf(command, sizeof(command), "python \"%s%s%s\"", NATURAL_ROUTE, ABSOLUTE_PATH, python_script);
             int status = system(command);
             if (status == -1) {
-                printf("Error executing this script\n");
+                printf("\n\nError executing this script\n");
             } else {
-                printf("Exit status: %d\n", status);
+                printf("\n\nExit status: %d\n", status);
             }
         }
     }else {
