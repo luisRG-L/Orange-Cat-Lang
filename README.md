@@ -50,3 +50,9 @@ If you want to contribute to Orange Cat, please follow these steps:
 ## License
 
 This project is licensed under the MIT License. See the LICENSE file for details.
+
+## Changelog
+
+Todos los cambios importantes en este proyecto se documentarán en este archivo.
+Este es el enlace para verlo:
+[Ver Changelog](./CHANGELOG.md)
