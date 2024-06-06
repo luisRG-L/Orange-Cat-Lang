@@ -12,7 +12,7 @@ def parse_code(code):
 class Parser:
     def __init__(self, op_toks, code):
         self.op_toks = op_toks
-        self.code = code.split('\n')
+        self.code = code
         self.token_pos = 0
         self.variables = {}
         self.local_variables = {}
@@ -90,4 +90,128 @@ class Parser:
                 self.verify(VARNAME_TOKEN)
                 params.append((param_type, param_name))
                 if self.op_toks[self.token_pos] == KEYWORD_TOKEN and self.code[self.token_pos] == ",":
-                    self.token_pos += 1  # Skip ',
+                    self.token_pos += 1  # Skip ','
+                elif self.op_toks[self.token_pos] == KEYWORD_TOKEN and self.code[self.token_pos] == ")":
+                    break
+                else:
+                    self.error("Expected ',' or ')' in function declaration")
+            self.verify(KEYWORD_TOKEN)  # Verifying ')'
+            self.verify(KEYWORD_TOKEN)  # Verifying '{'
+            func_body = []
+            while self.op_toks[self.token_pos] != KEYWORD_TOKEN or self.code[self.token_pos] != "}":
+                func_body.append(self.code[self.token_pos])
+                self.token_pos += 1
+            self.verify(KEYWORD_TOKEN)  # Verifying '}'
+            self.methods[var_name] = {'params': params, 'body': func_body}
+        else:
+            self.error("Unexpected token in variable declaration")
+
+    def parseLocalVariableDeclaration(self):
+        self.verify(VARTYPE_TOKEN)
+        var_type = self.code[self.token_pos - 1]
+        self.verify(VARNAME_TOKEN)
+        var_name = self.code[self.token_pos - 1]
+
+        if var_name in self.local_variables:
+            self.error(f"Local variable {var_name} is already declared")
+            return
+
+        self.verify(ASSIGN_TOKEN)
+        var_value = self.parseExpression()
+
+        self.local_variables[var_name] = var_value
+
+    def parseVariableAssignment(self):
+        var_name = self.code[self.token_pos]
+        if var_name not in self.variables and var_name not in self.local_variables:
+            self.error(f"Variable {var_name} is not declared")
+            return
+        self.token_pos += 1
+        self.verify(ASSIGN_TOKEN)
+        var_value = self.parseExpression()
+        if var_name in self.variables:
+            self.variables[var_name] = var_value
+        else:
+            self.local_variables[var_name] = var_value
+
+    def parseFunctionCall(self):
+        func_name = self.code[self.token_pos]
+        if func_name not in self.methods:
+            self.error(f"Function {func_name} is not declared")
+            return
+        self.token_pos += 1
+        self.verify(KEYWORD_TOKEN)  # Verifying '('
+        args = []
+        while self.op_toks[self.token_pos] != KEYWORD_TOKEN or self.code[self.token_pos] != ")":
+            args.append(self.parseExpression())
+            if self.op_toks[self.token_pos] == KEYWORD_TOKEN and self.code[self.token_pos] == ",":
+                self.token_pos += 1  # Skip ','
+            elif self.op_toks[self.token_pos] == KEYWORD_TOKEN and self.code[self.token_pos] == ")":
+                break
+            else:
+                self.error("Expected ',' or ')' in function call")
+        self.verify(KEYWORD_TOKEN)  # Verifying ')'
+        self.executeFunction(func_name, args)
+
+    def parsePrintStatement(self):
+        self.token_pos += 1
+        self.verify(KEYWORD_TOKEN)  # Verifying '('
+        message = ""
+        while self.op_toks[self.token_pos] != KEYWORD_TOKEN or self.code[self.token_pos] != ")":
+            if self.op_toks[self.token_pos] == VALUE_TOKEN:
+                message += self.code[self.token_pos]
+            elif self.op_toks[self.token_pos] == VARNAME_TOKEN:
+                var_name = self.code[self.token_pos]
+                if var_name in self.variables:
+                    message += str(self.variables[var_name])
+                elif var_name in self.local_variables:
+                    message += str(self.local_variables[var_name])
+                else:
+                    self.error(f"Variable {var_name} is not declared")
+                    return
+            self.token_pos += 1
+        self.verify(KEYWORD_TOKEN)  # Verifying ')'
+        message = message.replace('%', ' ')
+        message = message.replace('"', '')
+        print(message)
+
+    def parseExpression(self):
+        expr = self.code[self.token_pos]
+        self.token_pos += 1
+        return expr
+
+    def executeFunction(self, func_name, args):
+        func = self.methods[func_name]
+        if len(args) != len(func['params']):
+            self.error(f"Function {func_name} expected {len(func['params'])} arguments but got {len(args)}")
+            return
+        local_vars = {}
+        for i, (param_type, param_name) in enumerate(func['params']):
+            local_vars[param_name] = args[i]
+        self.local_variables = local_vars
+        old_code = self.code
+        old_op_toks = self.op_toks
+        self.code = func['body']
+        self.op_toks = iterateTokens(self.code)
+        self.token_pos = 0
+        self.doFunctionally()
+        self.local_variables = {}
+        self.code = old_code
+        self.op_toks = old_op_toks
+        self.token_pos = 0
+
+def iterateTokens(code):
+    tokenList = []
+    for line in code:
+        result = lexer_code(line.strip())
+        if result is not None:
+            tokenList.append(result)
+    return tokenList
+
+def getTokenArray(code):
+    tokenArray = []
+    for line in code:
+        result = getTokenIndex(line.strip())
+        if result is not None:
+            tokenArray.append(result)
+    return tokenArray
