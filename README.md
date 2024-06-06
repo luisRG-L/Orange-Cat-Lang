@@ -11,6 +11,11 @@ For install Orange Cat programming languaje follow this steps:
 
 ```bash
 winget install git
+```
+
+And then:
+
+```bash
 git clone https://github.com/tu_usuario/Orange-Cat-Lang.git
 ```
 
