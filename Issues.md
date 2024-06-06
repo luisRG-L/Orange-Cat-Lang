@@ -1,3 +1,3 @@
 # Orange Cat Issues
 
-We don't have any issues now
+We don't have any issues yet!
