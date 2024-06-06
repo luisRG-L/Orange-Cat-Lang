@@ -1,0 +1,59 @@
+{
+    "name": ".ocat",
+    "includes": [
+        "vscode-extension-API.json",
+        "ocat.ext"
+    ],
+    "type": "vscode-extension",
+    "API": [
+        "vscode-extension-API.json"
+    ],
+    "build_type": {
+        "name": "ocat-type",
+        "apply": "*.ocat",
+        "type": "langauje-extension",
+        "getAPI": "vscode-extension-API.json",
+        "export": {
+            "library": "ocat-type",
+            "includeJs": "extension.js",
+            "languaje": {
+                "id": "orangecat",
+                "name": "Orange Cat",
+                "extension": ["*.ocat"]
+            }
+        }
+    },
+    "Configurations": [
+        {
+            "name": "Orange Cat file",
+            "type": "ocat-type",
+            "include": "*"
+        }
+    ],
+    "vscodeUI": {
+        "type": "ocat-type",
+        "include": "*",
+        "title": "Ocat extension",
+        "created-by": "LuisRG-L",
+        "languaje": "orangecat",
+        "extension": "ocat.ext",
+        "button": [
+            {
+                "name": "Install",
+                "doJsMethod": "intallAPI"
+            },
+            {
+                "name": "Uninstall",
+                "doJsMethod": "uninstallAPI"
+            },
+            {
+                "name": "enable",
+                "doJsMethod": "enableAPI"   
+            },
+            {
+                "name": "disable",
+                "doJsMethod": "disableAPI"
+            }
+        ]
+    }
+}

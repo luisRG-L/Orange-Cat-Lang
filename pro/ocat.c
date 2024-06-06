@@ -2,8 +2,14 @@
 #include <string.h>
 #include <stdlib.h>
 
-#define NATURAL_ROUTE getenv("USERPROFILE")
-#define ABSOLUTE_PATH "\\Orange-Cat-Lang\\pro\\"
+//#ifdef _WIN32
+#   define NATURAL_ROUTE getenv("USERPROFILE")
+#   define ABSOLUTE_PATH "\\Orange Cat\\Orange-Cat-Lang\\pro\\python\\"
+/*#else
+#   define ABSOLUTE_PATH "./python"
+#   define NATURAL_ROUTE "./"
+#endif*/
+#define PY_VERSION "python"
 
 void print_help() {
     printf("Use: ocat [options]\n");
@@ -30,24 +36,24 @@ int main(int argc, char *argv[]) {
     if (strcmp(argv[1], "version") == 0) {
         printf("1.0.0\n");
     } else if (strcmp(argv[1], "--version") == 0) {
-        printf("1.0.0: 19/5/24");
+        printf("Version: 1.0.0\nDate: 19/5/24");
     } else if (strcmp(argv[1], "help") == 0) {
         print_help();
     } else if (strcmp(argv[1], "run") == 0) {
-        if (argc > 2 && strcmp(argv[2], "dev") == 0) {
+        if (strcmp(argv[2], "dev") == 0) {
             char command[512];
             const char *python_script = "devRunner.py";
-            snprintf(command, sizeof(command), "python \"%s%s%s\"", NATURAL_ROUTE, ABSOLUTE_PATH, python_script);
+            snprintf(command, sizeof(command), "%s \"%s%s%s\"", PY_VERSION, NATURAL_ROUTE, ABSOLUTE_PATH, python_script);
             int status = system(command);
             if (status == -1) {
                 printf("Error executing this script\n");
             } else {
                 printf("Exit code: %d\n", status);
             }
-        } else if (argc > 2 && strcmp(argv[2], "file") == 0){
+        } else if (strcmp(argv[2], "file") == 0){
             char command[512];
             const char *python_script = "runner.py";
-            snprintf(command, sizeof(command), "python \"%s%s%s\"", NATURAL_ROUTE, ABSOLUTE_PATH, python_script);
+            snprintf(command, sizeof(command), "%s \"%s%s%s\"", PY_VERSION, NATURAL_ROUTE, ABSOLUTE_PATH, python_script);
             int status = system(command);
             if (status == -1) {
                 printf("\n\nError executing this script\n");
@@ -67,7 +73,7 @@ int main(int argc, char *argv[]) {
     } else if (strcmp(argv[1], "clear") == 0) {
         char command[512];
         const char *python_script = "clear.py";
-        snprintf(command, sizeof(command), "python \"%s%s%s\"", NATURAL_ROUTE, ABSOLUTE_PATH, python_script);
+        snprintf(command, sizeof(command), "%s \"%s%s%s\"", PY_VERSION, NATURAL_ROUTE, ABSOLUTE_PATH, python_script);
         int status = system(command);
         if (status == -1) {
             printf("\n\nError executing this script\n");
@@ -78,17 +84,17 @@ int main(int argc, char *argv[]) {
         if (strcmp(argv[2], "dev") == 0) {
             char command[512];
             const char *python_script = "dev.py";
-            snprintf(command, sizeof(command), "python \"%s%s%s\"", NATURAL_ROUTE, ABSOLUTE_PATH, python_script);
+            snprintf(command, sizeof(command), "%s \"%s%s%s\"", PY_VERSION, NATURAL_ROUTE, ABSOLUTE_PATH, python_script);
             int status = system(command);
             if (status == -1) {
                 printf("\n\nError executing this script\n");
             } else {
                 printf("\n\nExit status: %d\n", status);
             }
-        } else if(argc > 2 && strcmp(argv[2], "file") == 0){
+        } else if(strcmp(argv[2], "file") == 0){
             char command[512];
             const char *python_script = "creater.py";
-            snprintf(command, sizeof(command), "python \"%s%s%s\"", NATURAL_ROUTE, ABSOLUTE_PATH, python_script);
+            snprintf(command, sizeof(command), "%s \"%s%s%s\"", PY_VERSION, NATURAL_ROUTE, ABSOLUTE_PATH, python_script);
             int status = system(command);
             if (status == -1) {
                 printf("\n\nError executing this script\n");
@@ -96,7 +102,17 @@ int main(int argc, char *argv[]) {
                 printf("\n\nExit status: %d\n", status);
             }
         }
-    }else {
+    } else if (strcmp(argv[1], "-ocf") == 0) {
+        char command[512];
+        const char *python_script = "ocf.py";
+        snprintf(command, sizeof(command), "%s \"%s%s%s\"", PY_VERSION, NATURAL_ROUTE, ABSOLUTE_PATH, python_script);
+        int status = system(command);
+        if (status == -1) {
+            printf("\n\nError executing this script\n");
+        } else {
+            printf("\n\nExit status: %d\n", status);
+        }
+    } else {
         printf("This ocat variant doesn't exists, put 'ocat help' for get the ocat variations\n");
     }
 
