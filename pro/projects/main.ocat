@@ -1,0 +1,5 @@
+func decirHolaMundo ( ) {
+print ( "Hello%world" ) ;
+} ;
+
+decirHolaMundo ( ) ;

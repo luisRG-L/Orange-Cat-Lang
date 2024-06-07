@@ -17,6 +17,7 @@ class Parser:
         self.variables = {}
         self.local_variables = {}
         self.methods = {}
+        self.classes = {}
         self.isRunning = True
         if VERBOSE_ACTIONS:
             print("Parsing operation tokens")
@@ -103,6 +104,30 @@ class Parser:
                 self.token_pos += 1
             self.verify(KEYWORD_TOKEN)  # Verifying '}'
             self.methods[var_name] = {'params': params, 'body': func_body}
+        elif var_type == "class":
+            self.verify(KEYWORD_TOKEN) # Verifying '('
+            params = []
+            while self.op_toks[self.token_pos] != KEYWORD_TOKEN or self.code[self.token_pos] != ")":
+                param_type = self.code[self.token_pos]
+                self.verify(VARTYPE_TOKEN)
+                param_name = self.code[self.token_pos]
+                self.verify(VARNAME_TOKEN)
+                params.append((param_name, param_name))
+                if self.op_toks[self.token_pos] == KEYWORD_TOKEN and self.code[self.token_pos] == ",":
+                    self.token_pos += 1  # Skip ','
+                elif self.op_toks[self.token_pos] == KEYWORD_TOKEN and self.code[self.token_pos] == ")":
+                    break
+                else:
+                    self.error("Expected ',' or ')' in class declaration")
+            self.verify(KEYWORD_TOKEN) # Verifying ')'
+            self.verify(KEYWORD_TOKEN) # Verifying '{'
+            ctor_body = []
+            while self.op_toks[self.token_pos] != KEYWORD_TOKEN or self.code[self.token_pos] != "}":
+                ctor_body.append(self.code[self.token_pos])
+                self.token_pos += 1
+            self.verify(KEYWORD_TOKEN)  # Verifying '}'
+            self.classes[var_name] = {'params': params, 'body': func_body}
+
         else:
             self.error("Unexpected token in variable declaration")
 

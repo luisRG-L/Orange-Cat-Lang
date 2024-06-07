@@ -56,6 +56,8 @@ KEYWORD = [
 # Adding LOCAL keyword
 LOCAL = ["local"]
 
+SPECIAL = [":"]
+
 tokens = [
     VARTYPE,
     ASSIGN,
@@ -65,7 +67,8 @@ tokens = [
     COMMENT,
     END,
     KEYWORD,
-    LOCAL  # Adding LOCAL to the tokens list
+    LOCAL,  # Adding LOCAL to the tokens list
+    SPECIAL
 ]
 
 VARTYPE_TOKEN = 0
@@ -77,7 +80,8 @@ COMMENT_TOKEN = 5
 END_TOKEN = 6
 KEYWORD_TOKEN = 7
 LOCAL_TOKEN = 8  # Adding LOCAL_TOKEN
-VARNAME_TOKEN = 9  # Adjusting VARNAME_TOKEN index
+VARNAME_TOKEN = 10  # Adjusting VARNAME_TOKEN index
+SPECIAL_TOKEN = 9
 
 tokenName = [
     "Var type",
@@ -89,6 +93,7 @@ tokenName = [
     "End",
     "Keyword",
     "Local",  # Adding "Local"
+    "Special",
     "Var name"
 ]
 

@@ -21,8 +21,11 @@ def getFile(file_path):
 
     
 def createFile(file_path, content):
-    with open(file_path, 'w') as file:
-        file.write(content)
+    try:
+        with open(file_path, 'w') as file:
+            file.write(content)
+    except:
+        print(f"Error")
 
 def createFolder(folder_path):
     if not os.path.exists(folder_path):
@@ -30,7 +33,7 @@ def createFolder(folder_path):
 
 def deleteAll(folder):
     if not os.path.isdir(folder):
-        raise ValueError(f"Error: '{folder}' don't exists.")
+        print(f"Error: '{folder}' don't exists.")
 
     for nombre in os.listdir(folder):
         complete_route = os.path.join(folder, nombre)
