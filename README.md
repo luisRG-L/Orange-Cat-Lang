@@ -58,8 +58,8 @@ This project is licensed under the MIT License. See the LICENSE file for details
 
 ## Changelog
 
-Todos los cambios importantes en este proyecto se documentarán en este archivo.
+All major changes to this project will be documented in this file.
 
-Este es el enlace para verlo:
+This is the link to see it:
 
-[Ver Changelog](./CHANGELOG.md)
+[See Changelog](./CHANGELOG.md)
