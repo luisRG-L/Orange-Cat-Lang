@@ -47,12 +47,13 @@ class Parser:
                     self.parsePrintStatement()
             elif self.op_toks[self.token_pos] == COMMENT_TOKEN:
                 print("Comment")
-            elif self.op_toks[self.token_pos] == LOCAL_TOKEN:
-                self.parseLocalVariableDeclaration()
+            elif self.op_toks[self.token_pos] == MODIFIER_TOKEN:
+                if self.code[self.token_pos] == "local":
+                    self.parseLocalVariableDeclaration()
             else:
-                self.error("Unexpected token")
+                self.error(f"Unexpected token")
             if self.isRunning and self.token_pos < len(self.op_toks) and self.op_toks[self.token_pos] != END_TOKEN:
-                self.error("Expected end of statement")
+                self.error(f"Expected end of statement")
             else:
                 self.token_pos += 1
 
@@ -132,19 +133,8 @@ class Parser:
             self.error("Unexpected token in variable declaration")
 
     def parseLocalVariableDeclaration(self):
-        self.verify(VARTYPE_TOKEN)
-        var_type = self.code[self.token_pos - 1]
-        self.verify(VARNAME_TOKEN)
-        var_name = self.code[self.token_pos - 1]
-
-        if var_name in self.local_variables:
-            self.error(f"Local variable {var_name} is already declared")
-            return
-
-        self.verify(ASSIGN_TOKEN)
-        var_value = self.parseExpression()
-
-        self.local_variables[var_name] = var_value
+        self.token_pos += 1
+        self.parseVariableDeclaration()
 
     def parseVariableAssignment(self):
         var_name = self.code[self.token_pos]
@@ -182,18 +172,17 @@ class Parser:
         self.token_pos += 1
         self.verify(KEYWORD_TOKEN)  # Verifying '('
         message = ""
-        while self.op_toks[self.token_pos] != KEYWORD_TOKEN or self.code[self.token_pos] != ")":
-            if self.op_toks[self.token_pos] == VALUE_TOKEN:
-                message += self.code[self.token_pos]
-            elif self.op_toks[self.token_pos] == VARNAME_TOKEN:
-                var_name = self.code[self.token_pos]
-                if var_name in self.variables:
-                    message += str(self.variables[var_name])
-                elif var_name in self.local_variables:
-                    message += str(self.local_variables[var_name])
-                else:
-                    self.error(f"Variable {var_name} is not declared")
-                    return
+        if self.op_toks[self.token_pos] == VALUE_TOKEN:
+            message += self.code[self.token_pos]
+        elif self.op_toks[self.token_pos] == VARNAME_TOKEN:
+            var_name = self.code[self.token_pos]
+            if var_name in self.variables:
+                message += str(self.variables[var_name])
+            elif var_name in self.local_variables:
+                message += str(self.local_variables[var_name])
+            else:
+                self.error(f"Variable {var_name} is not declared")
+                return
             self.token_pos += 1
         self.verify(KEYWORD_TOKEN)  # Verifying ')'
         message = message.replace('%', ' ')

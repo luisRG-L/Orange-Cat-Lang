@@ -39,7 +39,8 @@ COMMAND = [
     "if", "else", "elif",
     "forever", "for", "break",
     "return", "import", "export",
-    "then", "print", "question"
+    "then", "print", "question",
+    ""
 ]
 
 COMMENT = [
@@ -54,9 +55,9 @@ KEYWORD = [
 ]
 
 # Adding LOCAL keyword
-LOCAL = ["local"]
+MODIFIERS = ["local"]
 
-SPECIAL = [":"]
+SPECIAL = [":", "."]
 
 tokens = [
     VARTYPE,
@@ -67,7 +68,7 @@ tokens = [
     COMMENT,
     END,
     KEYWORD,
-    LOCAL,  # Adding LOCAL to the tokens list
+    MODIFIERS,  # Adding LOCAL to the tokens list
     SPECIAL
 ]
 
@@ -79,7 +80,7 @@ COMMAND_TOKEN = 4
 COMMENT_TOKEN = 5
 END_TOKEN = 6
 KEYWORD_TOKEN = 7
-LOCAL_TOKEN = 8  # Adding LOCAL_TOKEN
+MODIFIER_TOKEN = 8  # Adding LOCAL_TOKEN
 VARNAME_TOKEN = 10  # Adjusting VARNAME_TOKEN index
 SPECIAL_TOKEN = 9
 
@@ -92,7 +93,7 @@ tokenName = [
     "Comment",
     "End",
     "Keyword",
-    "Local",  # Adding "Local"
+    "Modifier",  # Adding "Local"
     "Special",
     "Var name"
 ]

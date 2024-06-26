@@ -12,7 +12,7 @@
 #define PY_VERSION "python"
 
 void print_help() {
-    printf("Use: ocat [options]\n");
+    printf("Use: ocat [command] [parameter]\n");
     printf("Options:\n");
     printf("  version           Shows the ocat version\n");
     printf("    --version           Shows the ocat version with other details\n");
@@ -25,6 +25,7 @@ void print_help() {
     printf("  create            Creates a new orange cat file\n");
     printf("    file              Creates a new orange cat file\n");
     printf("    dev               Creates a new orange cat project\n");
+    printf("  doc               Creates the documentation for a orange cat project");
 }
 
 int main(int argc, char *argv[]) {
@@ -36,7 +37,7 @@ int main(int argc, char *argv[]) {
     if (strcmp(argv[1], "version") == 0) {
         printf("1.0.0\n");
     } else if (strcmp(argv[1], "--version") == 0) {
-        printf("Version: 1.0.0\nDate: 19/5/24");
+        printf("Version: 1.0.1\nDate: 26/6/24");
     } else if (strcmp(argv[1], "help") == 0) {
         print_help();
     } else if (strcmp(argv[1], "run") == 0) {
@@ -105,6 +106,16 @@ int main(int argc, char *argv[]) {
     } else if (strcmp(argv[1], "-ocf") == 0) {
         char command[512];
         const char *python_script = "ocf.py";
+        snprintf(command, sizeof(command), "%s \"%s%s%s\"", PY_VERSION, NATURAL_ROUTE, ABSOLUTE_PATH, python_script);
+        int status = system(command);
+        if (status == -1) {
+            printf("\n\nError executing this script\n");
+        } else {
+            printf("\n\nExit status: %d\n", status);
+        }
+    } else if(strcmp(argv[1], "doc") == 0){
+        char command[512];
+        const char *python_script = "doct.py";
         snprintf(command, sizeof(command), "%s \"%s%s%s\"", PY_VERSION, NATURAL_ROUTE, ABSOLUTE_PATH, python_script);
         int status = system(command);
         if (status == -1) {
