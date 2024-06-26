@@ -19,10 +19,10 @@ And then:
 git clone https://github.com/tu_usuario/Orange-Cat-Lang.git
 ```
 
-2. Go to 'System variables' and open 'PATH'
-3. Then, Add a new variable and push to open the folder chooser
-4. Choose the folder in your orange cat lang folder, into pro, into commands
-5. Restart your computer
+ 2. Go to 'System variables' and open 'PATH'
+ 3. Then, Add a new variable and push to open the folder chooser
+ 4. Choose the folder in your orange cat lang folder, into pro, into commands
+ 5. Restart your computer
 
 ## Console system
 
@@ -58,8 +58,8 @@ This project is licensed under the MIT License. See the LICENSE file for details
 
 ## Changelog
 
-Todos los cambios importantes en este proyecto se documentarán en este archivo.
+All major changes to this project will be documented in this file.
 
-Este es el enlace para verlo:
+This is the link to see it:
 
-[Ver Changelog](./CHANGELOG.md)
+[See Changelog](./CHANGELOG.md)

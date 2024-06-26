@@ -51,9 +51,15 @@ class Parser:
                 if self.code[self.token_pos] == "local":
                     self.parseLocalVariableDeclaration()
             else:
+<<<<<<< HEAD
                 self.error(f"Unexpected token")
             if self.isRunning and self.token_pos < len(self.op_toks) and self.op_toks[self.token_pos] != END_TOKEN:
                 self.error(f"Expected end of statement")
+=======
+                self.error(f"Unexpected token {self.token_pos}")
+            if self.isRunning and self.token_pos < len(self.op_toks) and self.op_toks[self.token_pos] != END_TOKEN:
+                self.error(f"Expected end of statement {self.token_pos}")
+>>>>>>> 4f632af1b7fd1f8ffe2c76c7932c5a9048ddb486
             else:
                 self.token_pos += 1
 
